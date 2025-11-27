@@ -3,7 +3,11 @@ package org.lineageos.xiaomiparts.services
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.ComponentName
+import android.content.pm.PackageManager
+import android.os.SystemProperties
 import androidx.preference.PreferenceManager
+import org.lineageos.xiaomiparts.ui.revanced.ReVancedActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,6 +24,18 @@ class BootCompletedReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         Logging.d(TAG, "Received intent: ${intent.action}")
         if (intent.action != Intent.ACTION_LOCKED_BOOT_COMPLETED) return
+
+        // Disable ReVanced activity if not included in build
+        val isReVancedAvailable = SystemProperties.getBoolean("ro.revanced.available", false)
+        val pm = context.packageManager
+        val componentName = ComponentName(context, ReVancedActivity::class.java)
+        
+        pm.setComponentEnabledSetting(
+            componentName,
+            if (isReVancedAvailable) PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+            else PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP
+        )
 
         Logging.i(TAG, "Boot completed, restoring settings...")
         
