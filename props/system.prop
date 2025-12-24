@@ -1,3 +1,11 @@
+#ASCP about phone
+ro.ascp.device=Poco F3
+ro.ascp.maintainer=zenzer0s
+ro.ascp.soc=Snapdragon 870
+ro.ascp.display=1080p 120Hz
+ro.ascp.frontcam=20MP
+ro.ascp.backcam=48MP + 8MP + 5MP
+
 # Audio
 ro.config.media_vol_default=8
 ro.config.media_vol_steps=25
