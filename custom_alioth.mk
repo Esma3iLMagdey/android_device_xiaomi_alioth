@@ -20,10 +20,8 @@ $(call inherit-product, device/xiaomi/alioth/device.mk)
 
 TARGET_INCLUDE_REVANCED := true
 TARGET_DISABLE_EPPE = true
-ASCP_MAINTAINER = zenzer0s
 WITH_BCR := true
 WITH_GMS := true
-ASCP_OFFICIAL := true
 
 PRODUCT_NAME := lineage_alioth
 PRODUCT_DEVICE := alioth
